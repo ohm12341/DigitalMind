@@ -1,0 +1,6 @@
+C:\Users\anoop\source\repos\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Infra\bin\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Infra.deps.json
+C:\Users\anoop\source\repos\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Infra\bin\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Infra.dll
+C:\Users\anoop\source\repos\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Infra\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Infra.csprojAssemblyReference.cache
+C:\Users\anoop\source\repos\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Infra\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Infra.AssemblyInfoInputs.cache
+C:\Users\anoop\source\repos\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Infra\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Infra.AssemblyInfo.cs
+C:\Users\anoop\source\repos\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Infra\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Infra.csproj.CoreCompileInputs.cache
