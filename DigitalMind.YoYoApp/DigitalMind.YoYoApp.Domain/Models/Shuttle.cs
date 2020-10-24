@@ -1,8 +1,13 @@
-﻿namespace DigitalMind.YoYoApp.Domain.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DigitalMind.YoYoApp.Domain.Models
 {
     public class Shuttle
     {
-
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         public int AccumulatedShuttleDistance { get; set; }
         public int SpeedLevel { get; set; }
         public int ShuttleNo { get; set; }

@@ -2,17 +2,16 @@
 using DigitalMind.YoYoApp.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace DigitalMind.YoYoApp.Infra.Repository
 {
-    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected readonly YoYoTestContextDbContext Db;
+        protected readonly YoYoTestDbContext Db;
         protected readonly DbSet<TEntity> DbSet;
 
-        public Repository(YoYoTestContextDbContext context)
+        public Repository(YoYoTestDbContext context)
         {
             Db = context;
             DbSet = Db.Set<TEntity>();

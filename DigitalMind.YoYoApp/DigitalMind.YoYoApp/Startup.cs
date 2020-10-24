@@ -1,9 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using DigitalMind.YoYoApp.Application.Interfaces;
+using DigitalMind.YoYoApp.Application.Services;
+using DigitalMind.YoYoApp.Domain.Interfaces;
+using DigitalMind.YoYoApp.Domain.Models;
+using DigitalMind.YoYoApp.Infra.Context;
+using DigitalMind.YoYoApp.Infra.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,7 +25,14 @@ namespace DigitalMind.YoYoApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<YoYoTestDbContext>(opt => opt.UseInMemoryDatabase("TestDatabase"));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IAthleteShuttleServices, AthleteShuttleServices>();
+
             services.AddControllersWithViews();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,7 +8,7 @@ namespace DigitalMind.YoYoApp.Infra.EFMappings
     {
         public void Configure(EntityTypeBuilder<Athlete> builder)
         {
-
+            builder.Property(key => key.Id).ValueGeneratedOnAdd();
         }
     }
 }

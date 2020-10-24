@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ETU+c+enwhZ6uyzmlsZdGOH3DpeUyB33bxUhJLs4b4/YGC0rygYZteBAAFyPfyVD/VkEbOA5bebdZyneRVWV9A==",
+  "dgSpecHash": "HYulI9dYA2IHnTwLENhPUIkmkTHmZged58NRE8NZMoTzJw1wXRjX9Aldc/ZEBp67yx3LbaEsbMk5bEjeABPN1g==",
   "success": true,
   "projectFilePath": "C:\\Users\\anoop\\src\\DigitalMind\\DigitalMind.YoYoApp\\DigitalMind.YoYoApp.Infra\\DigitalMind.YoYoApp.Infra.csproj",
   "expectedPackageFiles": [
@@ -21,6 +21,7 @@
     "C:\\Users\\anoop\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.9\\microsoft.extensions.logging.abstractions.3.1.9.nupkg.sha512",
     "C:\\Users\\anoop\\.nuget\\packages\\microsoft.extensions.options\\3.1.9\\microsoft.extensions.options.3.1.9.nupkg.sha512",
     "C:\\Users\\anoop\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.9\\microsoft.extensions.primitives.3.1.9.nupkg.sha512",
+    "C:\\Users\\anoop\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\anoop\\.nuget\\packages\\system.collections.immutable\\1.7.1\\system.collections.immutable.1.7.1.nupkg.sha512",
     "C:\\Users\\anoop\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512",
     "C:\\Users\\anoop\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.7.1\\system.diagnostics.diagnosticsource.4.7.1.nupkg.sha512"

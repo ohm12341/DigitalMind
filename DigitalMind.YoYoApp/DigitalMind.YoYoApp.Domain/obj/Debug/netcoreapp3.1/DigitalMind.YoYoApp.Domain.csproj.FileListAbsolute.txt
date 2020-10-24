@@ -7,3 +7,12 @@ C:\Users\anoop\source\repos\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Domain\obj\D
 C:\Users\anoop\source\repos\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Domain\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.AssemblyInfo.cs
 C:\Users\anoop\source\repos\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Domain\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.dll
 C:\Users\anoop\source\repos\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Domain\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.pdb
+C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Domain\bin\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.deps.json
+C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Domain\bin\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.dll
+C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Domain\bin\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.pdb
+C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Domain\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.csprojAssemblyReference.cache
+C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Domain\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.csproj.CoreCompileInputs.cache
+C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Domain\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.AssemblyInfoInputs.cache
+C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Domain\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.AssemblyInfo.cs
+C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Domain\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.dll
+C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Domain\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.pdb

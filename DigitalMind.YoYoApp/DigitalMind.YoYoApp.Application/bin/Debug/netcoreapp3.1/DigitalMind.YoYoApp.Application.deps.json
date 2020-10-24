@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v3.1": {
       "DigitalMind.YoYoApp.Application/1.0.0": {
+        "dependencies": {
+          "DigitalMind.YoYoApp.Domain": "1.0.0"
+        },
         "runtime": {
           "DigitalMind.YoYoApp.Application.dll": {}
+        }
+      },
+      "DigitalMind.YoYoApp.Domain/1.0.0": {
+        "runtime": {
+          "DigitalMind.YoYoApp.Domain.dll": {}
         }
       }
     }
   },
   "libraries": {
     "DigitalMind.YoYoApp.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DigitalMind.YoYoApp.Domain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
