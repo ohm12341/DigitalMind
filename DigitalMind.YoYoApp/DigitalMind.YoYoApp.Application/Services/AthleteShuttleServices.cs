@@ -19,21 +19,52 @@ namespace DigitalMind.YoYoApp.Application.Services
             _athleteRepository = athleteRepository;
         }
 
+        public void AddAllAthletes(List<Athlete> athletes)
+        {
+            try
+            {
+                foreach (var athlete in athletes)
+                {
+                    _athleteRepository.Add(athlete);
+                }
+
+                _athleteRepository.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public void AddAllShuttles(List<Shuttle> shuttles)
         {
             try
             {
-                foreach (var  shuttle in shuttles)
+                foreach (var shuttle in shuttles)
                 {
                     _shuttleRepository.Add(shuttle);
                 }
 
                 _shuttleRepository.SaveChanges();
-                 
+
             }
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public List<Athlete> GetAllAthletes()
+        {
+            try
+            {
+                return _athleteRepository.GetAll().ToList();
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

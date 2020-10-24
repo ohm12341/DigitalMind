@@ -9,6 +9,8 @@ namespace DigitalMind.YoYoApp.Domain.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
+        public string Name { get; set; }
         public Shuttle FinalShuttle { get; set; }
         public Shuttle CurrentShuttle { get; set; }
         public AthleteTestState ShuttleState { get; set; }

@@ -1,6 +1,7 @@
 ﻿using DigitalMind.YoYoApp.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace DigitalMind.YoYoApp.Infra.EFMappings
 {
@@ -9,6 +10,7 @@ namespace DigitalMind.YoYoApp.Infra.EFMappings
         public void Configure(EntityTypeBuilder<Athlete> builder)
         {
             builder.Property(key => key.Id).ValueGeneratedOnAdd();
+           
         }
     }
 }
