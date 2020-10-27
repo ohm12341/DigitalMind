@@ -1,7 +1,8 @@
 using DigitalMind.YoYoApp.Application.Interfaces;
+using DigitalMind.YoYoApp.Application.Providers;
 using DigitalMind.YoYoApp.Application.Services;
+using DigitalMind.YoYoApp.Application.ViewModel;
 using DigitalMind.YoYoApp.Domain.Interfaces;
-using DigitalMind.YoYoApp.Domain.Models;
 using DigitalMind.YoYoApp.Infra.Context;
 using DigitalMind.YoYoApp.Infra.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -29,6 +30,10 @@ namespace DigitalMind.YoYoApp
             services.AddDbContext<YoYoTestDbContext>(opt => opt.UseInMemoryDatabase("TestDatabase"));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IAthleteShuttleServices, AthleteShuttleServices>();
+          
+            services.AddTransient<IStopWatchViewModel, StopWatchViewModel>();
+
+            services.AddSingleton<IStopWatchProvider, StopWatchProvider>();
 
             services.AddControllersWithViews();
 

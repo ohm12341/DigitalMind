@@ -1,4 +1,5 @@
-﻿using DigitalMind.YoYoApp.Domain.Models;
+﻿using DigitalMind.YoYoApp.Application.ViewModel;
+using DigitalMind.YoYoApp.Domain.Models;
 using System.Collections.Generic;
 
 namespace DigitalMind.YoYoApp.Application.Interfaces
@@ -31,5 +32,8 @@ namespace DigitalMind.YoYoApp.Application.Interfaces
         /// </summary>
         /// <param name="athletes"> list of athletes</param>
         void AddAllAthletes(List<Athlete> athletes);
+
+
+        
     }
 }

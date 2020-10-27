@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using DigitalMind.YoYoApp.TestData;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace DigitalMind.YoYoApp
 {
@@ -13,7 +8,7 @@ namespace DigitalMind.YoYoApp
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().SeedData().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -22,5 +17,7 @@ namespace DigitalMind.YoYoApp
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+
     }
 }

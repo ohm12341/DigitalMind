@@ -1,8 +1,69 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model DigitalMind.YoYoApp.Application.ViewModel.StopWatchViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h3>Shuttle</h3>
+<div class="row">
+    <div class="col-md-4">
+        <form>
+
+
+            <div class="form-group">
+                <label asp-for="TotalDistance" class="control-label"></label>
+                <input asp-for="TotalDistance" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalTime" class="control-label"></label>
+                <input asp-for="TotalTime" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="NextShuttle" class="control-label"></label>
+                <input asp-for="NextShuttle" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="ShuttleNo" class="control-label"></label>
+                <input id="shuttlenumber" asp-for="ShuttleNo" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <label  asp-for="SpeedLevel" class="control-label"></label>
+                <input id="shuttlespeedlevel" asp-for="SpeedLevel" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Speed" class="control-label"></label>
+                <input asp-for="Speed" class="form-control" />
+
+            </div>
+
+            <div class="form-group">
+                <input id="btnstopwatchstart"  value="Start" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 </div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var timeouthandle;
+      
+        var refreshComponent = function () {
+            var shuttleNo = $("#shuttlenumber").val()
+            var speedlevel = $("#shuttlespeedlevel").val()
+            window.clearInterval(timeouthandle);
+            $.get("/Home/GetStopWatchViewComponent", { shuttleNumber: shuttleNo, speedLevel: speedlevel }, function (data) {
+                $("#shuttlenumber").val(data.shuttleNo);
+                $("#shuttlespeedlevel").val(data.speedLevel)
+              
+                timeouthandle= window.setInterval(refreshComponent, data.levelTime*1000)
+            });
+        };
+        
+
+        $("#btnstopwatchstart").click(function () {
+            refreshComponent();
+        });
+
+    });
+</script>

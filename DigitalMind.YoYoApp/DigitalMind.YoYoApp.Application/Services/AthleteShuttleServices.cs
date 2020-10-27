@@ -1,4 +1,5 @@
 ﻿using DigitalMind.YoYoApp.Application.Interfaces;
+using DigitalMind.YoYoApp.Application.ViewModel;
 using DigitalMind.YoYoApp.Domain.Interfaces;
 using DigitalMind.YoYoApp.Domain.Models;
 using System;
@@ -10,13 +11,17 @@ namespace DigitalMind.YoYoApp.Application.Services
     public class AthleteShuttleServices : IAthleteShuttleServices
     {
         private readonly IRepository<Shuttle> _shuttleRepository;
+
         private readonly IRepository<Athlete> _athleteRepository;
+      
+        
         public AthleteShuttleServices(
             IRepository<Shuttle> shuttleRepository,
             IRepository<Athlete> athleteRepository)
         {
             _shuttleRepository = shuttleRepository;
             _athleteRepository = athleteRepository;
+
         }
 
         public void AddAllAthletes(List<Athlete> athletes)
@@ -73,6 +78,7 @@ namespace DigitalMind.YoYoApp.Application.Services
         {
             try
             {
+               
                 return _shuttleRepository.GetAll().ToList();
             }
             catch (Exception)
@@ -81,5 +87,7 @@ namespace DigitalMind.YoYoApp.Application.Services
                 throw;
             }
         }
+
+     
     }
 }

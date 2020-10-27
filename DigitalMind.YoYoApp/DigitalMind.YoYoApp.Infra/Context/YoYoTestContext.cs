@@ -24,6 +24,8 @@ namespace DigitalMind.YoYoApp.Infra.Context
 
             base.OnModelCreating(modelBuilder);
         }
+
+        
        
     }
 }
