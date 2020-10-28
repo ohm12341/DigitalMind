@@ -8,22 +8,22 @@
 
             <div class="form-group">
                 <label asp-for="TotalDistance" class="control-label"></label>
-                <input asp-for="TotalDistance" class="form-control" />
+                <input id="totalDistance" asp-for="TotalDistance" class="form-control" />
 
             </div>
             <div class="form-group">
                 <label asp-for="TotalTime" class="control-label"></label>
-                <input asp-for="TotalTime" class="form-control" />
+                <input id="totalTime" asp-for="TotalTime" class="form-control" />
 
             </div>
             <div class="form-group">
                 <label asp-for="NextShuttle" class="control-label"></label>
-                <input asp-for="NextShuttle" class="form-control" />
+                <input id="nextShuttle" asp-for="NextShuttle" class="form-control" />
 
             </div>
             <div class="form-group">
                 <label asp-for="ShuttleNo" class="control-label"></label>
-                <input id="shuttlenumber" asp-for="ShuttleNo" class="form-control" />
+                <input  id="shuttlenumber" asp-for="ShuttleNo" class="form-control" />
 
             </div>
             <div class="form-group">
@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Speed" class="control-label"></label>
-                <input asp-for="Speed" class="form-control" />
+                <input id="speed" asp-for="Speed" class="form-control" />
 
             </div>
 
@@ -61,6 +61,10 @@
             $.get("/Home/GetStopWatchViewModel", { shuttleNumber: shuttleNo, speedLevel: speedlevel }, function (data) {
                 $("#shuttlenumber").val(data.shuttleNo);
                 $("#shuttlespeedlevel").val(data.speedLevel)
+                $("#totalDistance").val(data.totalDistance)
+                $("#totalTime").val(data.totalTime)
+                $("#nextShuttle").val(data.nextShuttle)
+                $("#speed").val(data.speed)
               
                 timeouthandle= window.setInterval(refreshComponent, data.levelTime*1000)
             });
