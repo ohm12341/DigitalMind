@@ -13,7 +13,7 @@ namespace DigitalMind.YoYoApp.Application.Providers
         /// <param name="shuttleNumber"></param>
         /// <param name="speedLevel"></param>
         /// <returns></returns>
-        StopWatchViewModel GetCurrentStopWatchViewModel(int shuttleNumber, int speedLevel);
+        StopWatchViewModel GetStopWatchViewModel(int shuttleNumber, int speedLevel);
 
         /// <summary>
         /// Lsit of shuttles 

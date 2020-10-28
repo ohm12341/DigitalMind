@@ -43,6 +43,12 @@
         </form>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-12">
+        @await Html.PartialAsync("_AthleteListView.cshtml")
+    </div>
+</div>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -52,7 +58,7 @@
             var shuttleNo = $("#shuttlenumber").val()
             var speedlevel = $("#shuttlespeedlevel").val()
             window.clearInterval(timeouthandle);
-            $.get("/Home/GetStopWatchViewComponent", { shuttleNumber: shuttleNo, speedLevel: speedlevel }, function (data) {
+            $.get("/Home/GetStopWatchViewModel", { shuttleNumber: shuttleNo, speedLevel: speedlevel }, function (data) {
                 $("#shuttlenumber").val(data.shuttleNo);
                 $("#shuttlespeedlevel").val(data.speedLevel)
               

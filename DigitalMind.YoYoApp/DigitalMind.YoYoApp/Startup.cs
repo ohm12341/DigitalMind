@@ -35,6 +35,8 @@ namespace DigitalMind.YoYoApp
 
             services.AddSingleton<IStopWatchProvider, StopWatchProvider>();
 
+            services.AddSingleton<IAthleteListProvider, AthleteListProvider>();
+
             services.AddControllersWithViews();
 
 

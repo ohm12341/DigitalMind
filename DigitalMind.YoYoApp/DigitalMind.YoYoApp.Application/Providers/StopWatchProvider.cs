@@ -9,7 +9,7 @@ namespace DigitalMind.YoYoApp.Application.Providers
     {
         public List<Shuttle> Shuttles { get; set; }
 
-        public StopWatchViewModel GetCurrentStopWatchViewModel(int shuttleNumber, int speedLevel)
+        public StopWatchViewModel GetStopWatchViewModel(int shuttleNumber, int speedLevel)
         {
             var shuttle = Shuttles.FirstOrDefault(x => x.ShuttleNo.Equals(shuttleNumber) && x.SpeedLevel.Equals(speedLevel));
             var currentshuttleindex = Shuttles.IndexOf(shuttle)+1;

@@ -1,6 +1,7 @@
 ﻿using DigitalMind.YoYoApp.Domain.Common.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection.Metadata.Ecma335;
 
 namespace DigitalMind.YoYoApp.Domain.Models
 {
@@ -13,6 +14,6 @@ namespace DigitalMind.YoYoApp.Domain.Models
         public string Name { get; set; }
         public Shuttle FinalShuttle { get; set; }
         public Shuttle CurrentShuttle { get; set; }
-        public AthleteTestState ShuttleState { get; set; }
+        public string ShuttleState { get; set; }
     }
 }

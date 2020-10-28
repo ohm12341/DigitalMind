@@ -50,97 +50,116 @@ namespace DigitalMind.YoYoApp.TestData
                 new Athlete()
                 {
 
-                    Name = "Usain Bolt"
+                    Name = "Usain Bolt",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Freddy Adu"
+                    Name = "Usain Bolt",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "William Looby"
+                    Name = "William Looby",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Charlie Davies"
+                    Name = "Charlie Davies",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Maurice Edu"
+                    Name = "Maurice Edu",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Bart McGhee"
+                    Name = "Bart McGhee",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Jozy Altidore"
+                    Name = "Jozy Altidore",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Steve Cherundolo"
+                    Name = "Steve Cherundolo",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "DaMarcus Beasley"
+                    Name = "DaMarcus Beasley",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Jay DeMerit"
+                    Name = "Jay DeMerit",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Oguchi Onyewu"
+                    Name = "Oguchi Onyewu",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Adelino Gonsalves"
+                    Name = "Adelino Gonsalves",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Aldo Donelli"
+                    Name = "Aldo Donelli",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Thomas Florie"
+                    Name = "Thomas Florie",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Michael Bradley"
+                    Name = "Michael Bradley",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Fernando Clavijo"
+                    Name = "Fernando Clavijo",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Rick Davis"
+                    Name = "Rick Davis",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Roy Lassiter"
+                    Name = "Roy Lassiter",
+                     ShuttleState="Start"
                 },
                 new Athlete()
                 {
 
-                    Name = "Tab Ramos"
+                    Name = "Tab Ramos",
+                     ShuttleState="Start"
                 }
 
             };

@@ -22,27 +22,36 @@ namespace DigitalMind.YoYoApp.Controllers
         private readonly IAthleteShuttleServices athleteShuttleServices;
 
         private readonly IStopWatchProvider stopWatchProvider;
+        private readonly IAthleteListProvider athleteListProvider;
 
         public HomeController(ILogger<HomeController> logger,
             IStopWatchViewModel stopWatchViewModel,
             IAthleteShuttleServices athleteShuttleServices,
-            IStopWatchProvider stopWatchProvider)
+            IStopWatchProvider stopWatchProvider,
+            IAthleteListProvider  athleteListProvider)
         {
             _logger = logger;
             this.stopWatchViewModel = stopWatchViewModel;
             this.athleteShuttleServices = athleteShuttleServices;
             this.stopWatchProvider = stopWatchProvider;
-
+            this.athleteListProvider = athleteListProvider;
             this.stopWatchProvider.Shuttles = athleteShuttleServices.GetAllShuttles();
+            this.athleteListProvider.SetAthlete(athleteShuttleServices.GetAllAthletes());
         }
 
         public IActionResult Index()
         {
             return View();
         }
-        public IActionResult GetStopWatchViewComponent(int shuttleNumber, int speedLevel)
+        public IActionResult GetStopWatchViewModel(int shuttleNumber, int speedLevel)
         {
-            var viewmodel = stopWatchProvider.GetCurrentStopWatchViewModel(shuttleNumber, speedLevel);
+            var viewmodel = stopWatchProvider.GetStopWatchViewModel(shuttleNumber, speedLevel);
+            return Json(viewmodel);
+        }
+
+        public IActionResult GetUpdatedAthleteViewModel(int athleteId,string testresult)
+        {
+            var viewmodel = athleteListProvider.UpdateAndReturnNewAtheleViewModel(athleteId, testresult);
             return Json(viewmodel);
         }
         public IActionResult Privacy()

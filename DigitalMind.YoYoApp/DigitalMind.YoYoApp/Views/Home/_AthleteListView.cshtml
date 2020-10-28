@@ -1,0 +1,71 @@
+﻿@model DigitalMind.YoYoApp.Application.ViewModel.AthleteViewModel
+
+
+<div class="row">
+    <div class="col-12">
+        <table id="tblathlete" class="table table-sm table-striped table-hover border-bottom">
+            
+        </table>
+    </div>
+</div>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var timeouthandle;
+
+        var getAthletes = function (athleteId, testresult) {
+            window.clearInterval(timeouthandle);
+            $.get("/Home/GetUpdatedAthleteViewModel", { athleteId: athleteId, testresult: testresult}, function (data) {
+
+                $("#tblathlete tbody tr").remove();
+                var items = '';
+
+                var body = "<tbody> </tbody>";
+                $('#tblathlete').append(body);
+                var rows = "<tr>" +
+                    "<th>Name</th>" +
+                    "</tr>";
+                $('#tblathlete').append(rows);
+
+                $.each(data.athletes, function (i, item) {
+                    var row = '';
+                    
+                    if (item.shuttleState == 'Start') {
+                        
+                        row = "<tr>" +
+                            "<td>" + item.name + "</td>" +
+
+                            "<td><input type='button' style='width: 80px; height: 25px; background-color: greenyellow;' value='Warn' data-id='" + item.id + "' data-value='warn' /></td>" +
+                            "<td><input type='button' style='width: 80px; height: 25px; background-color: red;' value='Stop' data-id='" + item.id + "'  data-value='stop'  /></td>" +
+                            "</tr>";
+                    }
+                    else if (item.shuttleState == 'warn' ) {
+                        row = "<tr>" +
+                            "<td>" + item.name + "</td>" +
+                            "<td><input type='button' style='width: 80px; height: 25px; background-color: greenyellow;' value='Stop' data-id='" + item.id + "'  data-value='stop'  /></td>" +
+                            "</tr>";
+                    }
+                    else if (item.shuttleState == 'stop') {
+                        row = "<tr>" +
+                            "<td>" + item.name + "</td>" +
+                            "</tr>";
+                    }
+                    
+                    $('#tblathlete').append(row);
+                });
+            });
+        };
+
+        $(document).on("click", "tr input[value=Warn],input[value=Stop]", function () {
+            var dataID = $(this).attr("data-id");
+            var datavval = $(this).attr("data-value");
+            getAthletes(dataID ,datavval);
+        });
+
+        getAthletes(0,"start");
+
+
+    });
+</script>
