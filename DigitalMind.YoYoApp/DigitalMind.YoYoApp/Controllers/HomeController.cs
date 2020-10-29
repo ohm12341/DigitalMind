@@ -5,6 +5,7 @@ using DigitalMind.YoYoApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Linq;
 
 namespace DigitalMind.YoYoApp.Controllers
 {
@@ -40,6 +41,7 @@ namespace DigitalMind.YoYoApp.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.TotalTimeForTest = stopWatchProvider.Shuttles.Sum(x => x.LevelTime);
             return View();
         }
         public IActionResult GetStopWatchViewModel(int shuttleNumber, int speedLevel)
@@ -61,6 +63,7 @@ namespace DigitalMind.YoYoApp.Controllers
         }
 
 
+        [HttpPost]
         public IActionResult UpdateAthleteResult(UpdateAthleteStateModel updateAthleteStateModel)
         {
             var viewmodel = athleteListProvider.

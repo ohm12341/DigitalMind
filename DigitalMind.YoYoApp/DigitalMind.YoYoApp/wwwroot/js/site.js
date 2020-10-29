@@ -6,12 +6,15 @@
 $(document).ready(function () {
     var timeouthandle;
     $("#currentshuttlediv").hide();
+
+    
     var refreshComponent = function () {
         var shuttleNo = $('#shuttlenumber').text();
         var speedlevel = $("#shuttlespeedlevel").text()
         window.clearInterval(timeouthandle);
         $.get("/Home/GetStopWatchViewModel", { shuttleNumber: shuttleNo, speedLevel: speedlevel }, function (data) {
-
+            
+            
             timeouthandle = window.setInterval(refreshComponent, data.levelTime * 1000)
             $("#shuttlenumber").html(data.shuttleNo);
             $("#shuttlespeedlevel").html(data.speedLevel)
@@ -117,7 +120,34 @@ $(document).ready(function () {
     $("#btnstopwatchstart").click(function () {
         $("#playbuttondiv").hide();
         $("#currentshuttlediv").show();
+        animate1();
         refreshComponent();
     });
 
+   
+    var setProgress=  function (elem, percent) {
+        var
+            degrees = percent * 3.6,
+            transform = /MSIE 9/.test(navigator.userAgent) ? 'msTransform' : 'transform';
+        elem.find('.counter').attr('data-percent', Math.round(percent));
+        elem.find('.progressEnd').css(transform, 'rotate(' + degrees + 'deg)');
+        elem.find('.progress').css(transform, 'rotate(' + degrees + 'deg)');
+        if (percent >= 50 && !/(^|\s)fiftyPlus(\s|$)/.test(elem.className))
+            elem.className += ' fiftyPlus';
+    }
+
+    var animate1 = function () {
+        alert(number)
+       var
+           elem = $('.circlePercent'),
+           percent = 0;
+       (function animate() {
+           setProgress(elem, (percent += .25));
+           if (percent < number)
+               setTimeout(animate, 15);
+       })();
+    }
+
+    
 });
+

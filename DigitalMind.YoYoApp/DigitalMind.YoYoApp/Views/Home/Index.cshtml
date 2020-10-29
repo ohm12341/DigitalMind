@@ -1,7 +1,11 @@
 ﻿@model DigitalMind.YoYoApp.Application.ViewModel.StopWatchViewModel
 
 <h3>Shuttle</h3>
-
+<div class="circlePercent">
+    <div class="counter" data-percent="0"></div>
+    <div class="progress"></div>
+    <div class="progressEnd"></div>
+</div>
 <div style="text-align:center;">
 
     <div id="currentshuttlediv" style="text-align:center;border-radius: 50%;">
@@ -25,10 +29,10 @@
         <div class="col" style="padding-right:20px; border-right: 2px solid #ccc;">
             <div class="row" style="text-align:center;">
                 <label class="control-label">Next Shuttle</label>
-               
+
             </div>
             <div class="row" style="text-align:center;">
-                <label id="nextShuttle"  class="control-label"> </label>
+                <label id="nextShuttle" class="control-label"> </label>
             </div>
         </div>
         <div class="col" style="padding-right:20px; border-right: 2px solid #ccc;">
@@ -36,7 +40,7 @@
                 <label class="control-label"> Total Time</label>
             </div>
             <div class="row" style="text-align:center;padding-right:20px">
-                <label  id="totalTime" class="control-label"> </label>
+                <label id="totalTime" class="control-label"> </label>
             </div>
         </div>
         <div class="col">
@@ -50,10 +54,14 @@
     </div>
 
 </div>
-<br/>
+<br />
 <div>
     @await Html.PartialAsync("_AthleteListView.cshtml")
 </div>
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
-
+<script type="text/javascript">
+    var number = @ViewBag.TotalTimeForTest; //Accessing the number from the ViewBag
+   
+    
+</script>
