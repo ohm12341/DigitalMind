@@ -16,5 +16,6 @@ namespace DigitalMind.YoYoApp.Domain.Models
         public string CommulativeTime { get; set; }
         public string StartTime { get; set; }
         public float ApproxVo2Max { get; set; }
+        
     }
 }

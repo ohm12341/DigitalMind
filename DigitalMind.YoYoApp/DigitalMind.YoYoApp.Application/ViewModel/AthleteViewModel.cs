@@ -7,7 +7,7 @@ namespace DigitalMind.YoYoApp.Application.ViewModel
 {
     public class AthleteViewModel
     {
-
         public List<Athlete>  Athletes { get; set; }
+
     }
 }

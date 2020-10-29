@@ -6,11 +6,15 @@ namespace DigitalMind.YoYoApp.Application.Providers
 {
     public interface IAthleteListProvider
     {
-        
 
-        void SetAthlete(List<Athlete> Athletes);
+        void SetShuttles(List<Shuttle> shuttles);
 
-        AthleteViewModel UpdateAndReturnNewAtheleViewModel(int athleteId, string testresult);
+        void SetAthletes(List<Athlete> Athletes);
+
+        AthleteViewModel GetUpdatedAtheleViewModel(int athleteId, 
+            string testresult,
+            int shuttlenumber,
+           int shuttlespeedlevel);
 
         
     }

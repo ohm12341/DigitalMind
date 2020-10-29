@@ -1,15 +1,10 @@
 ﻿using DigitalMind.YoYoApp.Application.Interfaces;
 using DigitalMind.YoYoApp.Application.Providers;
 using DigitalMind.YoYoApp.Application.ViewModel;
-using DigitalMind.YoYoApp.Domain.Models;
 using DigitalMind.YoYoApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 
 namespace DigitalMind.YoYoApp.Controllers
 {
@@ -18,7 +13,7 @@ namespace DigitalMind.YoYoApp.Controllers
         private readonly ILogger<HomeController> _logger;
 
         private readonly IStopWatchViewModel stopWatchViewModel;
-      
+
         private readonly IAthleteShuttleServices athleteShuttleServices;
 
         private readonly IStopWatchProvider stopWatchProvider;
@@ -28,15 +23,19 @@ namespace DigitalMind.YoYoApp.Controllers
             IStopWatchViewModel stopWatchViewModel,
             IAthleteShuttleServices athleteShuttleServices,
             IStopWatchProvider stopWatchProvider,
-            IAthleteListProvider  athleteListProvider)
+            IAthleteListProvider athleteListProvider)
         {
             _logger = logger;
             this.stopWatchViewModel = stopWatchViewModel;
             this.athleteShuttleServices = athleteShuttleServices;
             this.stopWatchProvider = stopWatchProvider;
             this.athleteListProvider = athleteListProvider;
+
             this.stopWatchProvider.Shuttles = athleteShuttleServices.GetAllShuttles();
-            this.athleteListProvider.SetAthlete(athleteShuttleServices.GetAllAthletes());
+            
+            this.athleteListProvider.SetAthletes(athleteShuttleServices.GetAllAthletes());
+
+            this.athleteListProvider.SetShuttles(this.stopWatchProvider.Shuttles);
         }
 
         public IActionResult Index()
@@ -49,9 +48,15 @@ namespace DigitalMind.YoYoApp.Controllers
             return Json(viewmodel);
         }
 
-        public IActionResult GetUpdatedAthleteViewModel(int athleteId,string testresult)
+        public IActionResult GetUpdatedAthleteViewModel(UpdateAthleteStateModel updateAthleteStateModel)
         {
-            var viewmodel = athleteListProvider.UpdateAndReturnNewAtheleViewModel(athleteId, testresult);
+            var viewmodel = athleteListProvider.
+                                    GetUpdatedAtheleViewModel(
+                                    updateAthleteStateModel.athleteId,
+                                    updateAthleteStateModel.testresult,
+                                    updateAthleteStateModel.shuttlenumber,
+                                    updateAthleteStateModel.shuttlespeedlevel);
+           
             return Json(viewmodel);
         }
         public IActionResult Privacy()
@@ -66,6 +71,6 @@ namespace DigitalMind.YoYoApp.Controllers
         }
 
 
-       
+
     }
 }

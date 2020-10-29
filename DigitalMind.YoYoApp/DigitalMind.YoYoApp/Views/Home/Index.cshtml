@@ -1,77 +1,86 @@
 ﻿@model DigitalMind.YoYoApp.Application.ViewModel.StopWatchViewModel
 
 <h3>Shuttle</h3>
-<div class="row">
-    <div class="col-md-4">
-        <form>
 
+<div style="text-align:center;">
 
-            <div class="form-group">
-                <label asp-for="TotalDistance" class="control-label"></label>
-                <input id="totalDistance" asp-for="TotalDistance" class="form-control" />
+    <div id="currentshuttlediv" style="text-align:center;border-radius: 50%;">
+        <div class="form-group">
+            <label class="control-label"> Shuttle</label>
+            <label id="shuttlenumber" class="control-label"> </label>
+            <br />
+            <label class="control-label"> Level</label>
+            <label id="shuttlespeedlevel" class="control-label"></label>
+            <br />
+            <label id="speed" class="control-label"></label>
+            <label class="control-label">km/h</label>
 
-            </div>
-            <div class="form-group">
-                <label asp-for="TotalTime" class="control-label"></label>
-                <input id="totalTime" asp-for="TotalTime" class="form-control" />
-
-            </div>
-            <div class="form-group">
-                <label asp-for="NextShuttle" class="control-label"></label>
-                <input id="nextShuttle" asp-for="NextShuttle" class="form-control" />
-
-            </div>
-            <div class="form-group">
-                <label asp-for="ShuttleNo" class="control-label"></label>
-                <input  id="shuttlenumber" asp-for="ShuttleNo" class="form-control" />
-
-            </div>
-            <div class="form-group">
-                <label  asp-for="SpeedLevel" class="control-label"></label>
-                <input id="shuttlespeedlevel" asp-for="SpeedLevel" class="form-control" />
-
-            </div>
-            <div class="form-group">
-                <label asp-for="Speed" class="control-label"></label>
-                <input id="speed" asp-for="Speed" class="form-control" />
-
-            </div>
-
-            <div class="form-group">
-                <input id="btnstopwatchstart"  value="Start" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
+
+    <div id="playbuttondiv" style="text-align:center;border-radius: 50%;">
+        <button id="btnstopwatchstart" class='button play'></button>
+    </div>
+    <div class="row">
+        <div class="col" style="padding-right:20px; border-right: 2px solid #ccc;">
+            <div class="row" style="text-align:center;">
+                <label class="control-label">Next Shuttle</label>
+               
+            </div>
+            <div class="row" style="text-align:center;">
+                <label id="nextShuttle"  class="control-label"> </label>
+            </div>
+        </div>
+        <div class="col" style="padding-right:20px; border-right: 2px solid #ccc;">
+            <div class="row" style="text-align:center;padding-right:20px">
+                <label class="control-label"> Total Time</label>
+            </div>
+            <div class="row" style="text-align:center;padding-right:20px">
+                <label  id="totalTime" class="control-label"> </label>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row" style="text-align:center;padding-right:20px">
+                <label class="control-label"> Total Distance</label>
+            </div>
+            <div class="row" style="text-align:center;padding-right:20px">
+                <label id="totalDistance" class="control-label"> </label>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br/>
+<div>
+    @await Html.PartialAsync("_AthleteListView.cshtml")
 </div>
 
-<div class="row">
-    <div class="col-12">
-        @await Html.PartialAsync("_AthleteListView.cshtml")
-    </div>
-</div>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var timeouthandle;
-      
+        $("#currentshuttlediv").hide();
         var refreshComponent = function () {
-            var shuttleNo = $("#shuttlenumber").val()
-            var speedlevel = $("#shuttlespeedlevel").val()
+            var shuttleNo = $('#shuttlenumber').text();
+            var speedlevel = $("#shuttlespeedlevel").text()
             window.clearInterval(timeouthandle);
             $.get("/Home/GetStopWatchViewModel", { shuttleNumber: shuttleNo, speedLevel: speedlevel }, function (data) {
-                $("#shuttlenumber").val(data.shuttleNo);
-                $("#shuttlespeedlevel").val(data.speedLevel)
-                $("#totalDistance").val(data.totalDistance)
-                $("#totalTime").val(data.totalTime)
-                $("#nextShuttle").val(data.nextShuttle)
-                $("#speed").val(data.speed)
-              
-                timeouthandle= window.setInterval(refreshComponent, data.levelTime*1000)
+
+                timeouthandle = window.setInterval(refreshComponent, data.levelTime * 1000)
+                $("#shuttlenumber").html(data.shuttleNo);
+                $("#shuttlespeedlevel").html(data.speedLevel)
+                $("#totalDistance").html(data.totalDistance)
+                $("#totalTime").html(data.totalTime)
+                $("#nextShuttle").html(data.nextShuttle)
+                $("#speed").html(data.speed)
+
             });
         };
-        
+
 
         $("#btnstopwatchstart").click(function () {
+            $("#playbuttondiv").hide();
+            $("#currentshuttlediv").show();
             refreshComponent();
         });
 

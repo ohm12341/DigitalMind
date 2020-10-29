@@ -1,6 +1,7 @@
 ﻿using DigitalMind.YoYoApp.Application.ViewModel;
 using DigitalMind.YoYoApp.Domain.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DigitalMind.YoYoApp.Application.Providers
 {
@@ -8,20 +9,39 @@ namespace DigitalMind.YoYoApp.Application.Providers
     {
         List<Athlete> _athletes { get; set; }
 
+        List<Shuttle> _shuttles { get; set; }
+
         bool isAthleteInitialized;
 
-        public void SetAthlete(List<Athlete> Athletes)
+        bool isShuttleInitialized;
+
+
+        public void SetAthletes(List<Athlete>  athletes)
         {
             if (!isAthleteInitialized)
             {
-                _athletes = Athletes;
+                _athletes = athletes;
                 isAthleteInitialized = true;
             }
 
 
         }
 
-        public AthleteViewModel UpdateAndReturnNewAtheleViewModel(int athleteId, string testresult)
+        public void SetShuttles(List<Shuttle>  shuttles)
+        {
+            if (!isShuttleInitialized)
+            {
+                _shuttles = shuttles;
+                isShuttleInitialized = true;
+            }
+
+
+        }
+
+        public AthleteViewModel GetUpdatedAtheleViewModel(int athleteId,
+            string testresult,
+            int shuttlenumber,
+           int shuttlespeedlevel)
         {
 
             foreach (var athlete in _athletes)
@@ -29,13 +49,13 @@ namespace DigitalMind.YoYoApp.Application.Providers
                 if (athlete.Id.Equals(athleteId))
                 {
                     athlete.ShuttleState = testresult;
-
+                    athlete.FinishedShuttles = _shuttles.Where(x => x.ShuttleNo <= shuttlenumber && x.SpeedLevel <= shuttlespeedlevel).ToList();
                 }
             }
 
             AthleteViewModel athleteViewModel = new AthleteViewModel()
             {
-                Athletes = _athletes
+                Athletes = _athletes,
             };
 
             return athleteViewModel;
