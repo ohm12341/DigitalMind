@@ -56,33 +56,4 @@
 </div>
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        var timeouthandle;
-        $("#currentshuttlediv").hide();
-        var refreshComponent = function () {
-            var shuttleNo = $('#shuttlenumber').text();
-            var speedlevel = $("#shuttlespeedlevel").text()
-            window.clearInterval(timeouthandle);
-            $.get("/Home/GetStopWatchViewModel", { shuttleNumber: shuttleNo, speedLevel: speedlevel }, function (data) {
 
-                timeouthandle = window.setInterval(refreshComponent, data.levelTime * 1000)
-                $("#shuttlenumber").html(data.shuttleNo);
-                $("#shuttlespeedlevel").html(data.speedLevel)
-                $("#totalDistance").html(data.totalDistance)
-                $("#totalTime").html(data.totalTime)
-                $("#nextShuttle").html(data.nextShuttle)
-                $("#speed").html(data.speed)
-
-            });
-        };
-
-
-        $("#btnstopwatchstart").click(function () {
-            $("#playbuttondiv").hide();
-            $("#currentshuttlediv").show();
-            refreshComponent();
-        });
-
-    });
-</script>

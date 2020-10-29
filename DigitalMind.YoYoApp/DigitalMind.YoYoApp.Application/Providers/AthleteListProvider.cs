@@ -16,7 +16,7 @@ namespace DigitalMind.YoYoApp.Application.Providers
         bool isShuttleInitialized;
 
 
-        public void SetAthletes(List<Athlete>  athletes)
+        public void SetAthletes(List<Athlete> athletes)
         {
             if (!isAthleteInitialized)
             {
@@ -27,7 +27,7 @@ namespace DigitalMind.YoYoApp.Application.Providers
 
         }
 
-        public void SetShuttles(List<Shuttle>  shuttles)
+        public void SetShuttles(List<Shuttle> shuttles)
         {
             if (!isShuttleInitialized)
             {
@@ -50,6 +50,8 @@ namespace DigitalMind.YoYoApp.Application.Providers
                 {
                     athlete.ShuttleState = testresult;
                     athlete.FinishedShuttles = _shuttles.Where(x => x.ShuttleNo <= shuttlenumber && x.SpeedLevel <= shuttlespeedlevel).ToList();
+                    if (athlete.CurrentShuttle == null)
+                        athlete.CurrentShuttle = _shuttles.Where(x => x.ShuttleNo == shuttlenumber && x.SpeedLevel == shuttlespeedlevel).FirstOrDefault();
                 }
             }
 
@@ -61,5 +63,26 @@ namespace DigitalMind.YoYoApp.Application.Providers
             return athleteViewModel;
         }
 
+        public AthleteViewModel UpdateTestResultForAnAthlete(int athleteId,
+            string testresult,
+            int shuttlenumber,
+            int shuttlespeedlevel)
+        {
+            foreach (var athlete in _athletes)
+            {
+                if (athlete.Id.Equals(athleteId))
+                {
+                    athlete.ShuttleState = testresult;
+                    athlete.CurrentShuttle = _shuttles.Where(x => x.ShuttleNo == shuttlenumber && x.SpeedLevel == shuttlespeedlevel).FirstOrDefault();
+                }
+            }
+
+            AthleteViewModel athleteViewModel = new AthleteViewModel()
+            {
+                Athletes = _athletes,
+            };
+
+            return athleteViewModel;
+        }
     }
 }

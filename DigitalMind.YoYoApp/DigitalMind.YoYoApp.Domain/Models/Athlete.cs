@@ -14,6 +14,8 @@ namespace DigitalMind.YoYoApp.Domain.Models
 
         public string Name { get; set; }
         public List<Shuttle> FinishedShuttles { get; set; }
+
+        public Shuttle CurrentShuttle { get; set; }
         public string ShuttleState { get; set; }
     }
 }

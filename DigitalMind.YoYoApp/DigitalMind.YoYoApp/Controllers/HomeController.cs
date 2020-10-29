@@ -59,6 +59,19 @@ namespace DigitalMind.YoYoApp.Controllers
            
             return Json(viewmodel);
         }
+
+
+        public IActionResult UpdateAthleteResult(UpdateAthleteStateModel updateAthleteStateModel)
+        {
+            var viewmodel = athleteListProvider.
+                                    UpdateTestResultForAnAthlete(
+                                    updateAthleteStateModel.athleteId,
+                                    updateAthleteStateModel.testresult,
+                                    updateAthleteStateModel.shuttlenumber,
+                                    updateAthleteStateModel.shuttlespeedlevel);
+
+            return Json(viewmodel);
+        }
         public IActionResult Privacy()
         {
             return View();

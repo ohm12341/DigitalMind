@@ -16,6 +16,11 @@ namespace DigitalMind.YoYoApp.Application.Providers
             int shuttlenumber,
            int shuttlespeedlevel);
 
-        
+        AthleteViewModel UpdateTestResultForAnAthlete(int athleteId,
+          string testresult,
+          int shuttlenumber,
+         int shuttlespeedlevel);
+
+
     }
 }
