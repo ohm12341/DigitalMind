@@ -1,36 +1,32 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿
 var displayminutes;
 var displayseconds;
 var percent = 0;
 var initializeTimer = 1.5 // enter in minutes
 var minutesToSeconds = number;
+var startCountDownTimer;
+var rotationAngle = 360 / number;
 var setTime;
 $(document).ready(function () {
     var timeouthandle;
+
     $("#currentshuttlediv").hide();
 
-    setTime = getTime();
-    $(".btn-timer").html(setTime[0] + ":" + setTime[1])
-
+    $(".btn-timer").html("Start")
 
     var refreshComponent = function () {
         var shuttleNo = $('#shuttlenumber').text();
         var speedlevel = $("#shuttlespeedlevel").text()
         window.clearInterval(timeouthandle);
         $.get("/Home/GetStopWatchViewModel", { shuttleNumber: shuttleNo, speedLevel: speedlevel }, function (data) {
-
-           
            
             if (data.isFinalShuttle == false) {
                 timeouthandle = window.setInterval(refreshComponent, data.levelTime * 1000)
             }
             else {
                 window.clearInterval(timeouthandle);
+                window.clearInterval(startCountDownTimer);
             }
-
             currentTimeLevel += data.levelTime;
 
             $("#shuttlenumber").html(data.shuttleNo);
@@ -126,7 +122,6 @@ $(document).ready(function () {
             });
     });
 
-
     $(document).on("click", "tr input[value=Warn],input[value=Stop]", function () {
         var dataID = $(this).attr("data-id");
         var datavval = $(this).attr("data-value");
@@ -139,27 +134,22 @@ $(document).ready(function () {
 
     });
 
-
-    var setProgress = function (elem, percent) {
-        var
-            degrees = percent,
-            transform = /MSIE 9/.test(navigator.userAgent) ? 'msTransform' : 'transform';
-        elem.find('.counter').attr('data-percent', Math.round(percent));
-        elem.find('.progressEnd').css(transform, 'rotate(' + degrees + 'deg)');
-        elem.find('.progress').css(transform, 'rotate(' + degrees + 'deg)');
-        if (percent >= number / 2 && !/(^|\s)fiftyPlus(\s|$)/.test(elem.className))
-            elem.className += ' fiftyPlus';
+    var setProgress = function (percent) {
+        var progressValue = Math.round((percent * 100) / number)
+        $('.progress-bar').css('width', progressValue + '%').attr('aria-valuenow', progressValue).html(progressValue + '%');
     }
 
     var animate1 = function () {
 
-        var
-            elem = $('.circlePercent'),
-            percent = 0;
+        var  percent = 0;
         (function animate() {
-            setProgress(elem, (percent += .1));
+            setProgress((percent += 1));
             if (percent < number)
                 setTimeout(animate, 1000);
+            else {
+                $(".btn-timer").html("Start");
+                $('.progress-bar').css('width', 0 + '%').attr('aria-valuenow', 0).html(0 + '%');
+            }
         })();
     }
 
@@ -167,22 +157,19 @@ $(document).ready(function () {
 
         $("#playbuttondiv").hide();
         $("#currentshuttlediv").show();
+        setTime = getTime();
+        $(".btn-timer").html(Math.round(setTime[0]) + ":" + Math.round(setTime[1]))
         animate1();
         refreshComponent();
-        var startCountDownTimer = setInterval(function () {
-
+        startCountDownTimer  = setInterval(function () {
 
             minutesToSeconds = minutesToSeconds - 1;
             var timer = getTime();
-            $(".btn-timer").html(timer[0] + ":" + timer[1]);
+            $(".btn-timer").html(Math.round(timer[0]) + ":" + Math.round(timer[1]));
             if (minutesToSeconds == 0) {
                 clearInterval(startCountDownTimer);
                 console.log("completed");
             }
-
-
-
-
         }, 1000)
     });
     function getTime() {
