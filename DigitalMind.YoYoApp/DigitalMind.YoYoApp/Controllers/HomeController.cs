@@ -42,6 +42,9 @@ namespace DigitalMind.YoYoApp.Controllers
         public IActionResult Index()
         {
             ViewBag.TotalTimeForTest = stopWatchProvider.Shuttles.Sum(x => x.LevelTime);
+
+            ViewBag.ShuttleInitialTime = stopWatchProvider.Shuttles.FirstOrDefault().LevelTime;
+
             return View();
         }
         public IActionResult GetStopWatchViewModel(int shuttleNumber, int speedLevel)

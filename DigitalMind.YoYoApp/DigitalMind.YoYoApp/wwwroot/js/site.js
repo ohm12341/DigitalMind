@@ -2,20 +2,37 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-
+var displayminutes;
+var displayseconds;
+var percent = 0;
+var initializeTimer = 1.5 // enter in minutes
+var minutesToSeconds = number;
+var setTime;
 $(document).ready(function () {
     var timeouthandle;
     $("#currentshuttlediv").hide();
 
-    
+    setTime = getTime();
+    $(".btn-timer").html(setTime[0] + ":" + setTime[1])
+
+
     var refreshComponent = function () {
         var shuttleNo = $('#shuttlenumber').text();
         var speedlevel = $("#shuttlespeedlevel").text()
         window.clearInterval(timeouthandle);
         $.get("/Home/GetStopWatchViewModel", { shuttleNumber: shuttleNo, speedLevel: speedlevel }, function (data) {
-            
-            
-            timeouthandle = window.setInterval(refreshComponent, data.levelTime * 1000)
+
+           
+           
+            if (data.isFinalShuttle == false) {
+                timeouthandle = window.setInterval(refreshComponent, data.levelTime * 1000)
+            }
+            else {
+                window.clearInterval(timeouthandle);
+            }
+
+            currentTimeLevel += data.levelTime;
+
             $("#shuttlenumber").html(data.shuttleNo);
             $("#shuttlespeedlevel").html(data.speedLevel)
             $("#totalDistance").html(data.totalDistance)
@@ -69,10 +86,10 @@ $(document).ready(function () {
                             var option = '';
                             if (item.currentShuttle.shuttleNo == shuttle.shuttleNo
                                 && item.currentShuttle.speedLevel == shuttle.speedLevel) {
-                                option = '<option value="' + item.id +'" selected>' + item.currentShuttle.shuttleNo + "-" + item.currentShuttle.speedLevel + "</option>"
+                                option = '<option value="' + item.id + '" selected>' + item.currentShuttle.shuttleNo + "-" + item.currentShuttle.speedLevel + "</option>"
                             }
                             else {
-                                option = '<option value="' + item.id +'">' + shuttle.shuttleNo + "-" + shuttle.speedLevel + "</option>"
+                                option = '<option value="' + item.id + '">' + shuttle.shuttleNo + "-" + shuttle.speedLevel + "</option>"
                             }
 
                             s = s + (option);
@@ -88,9 +105,10 @@ $(document).ready(function () {
                     $('#tblathlete').append(row);
                 });
 
-              
+
             });
     };
+
     $(document).on('change', "#athleteShuttleResult", function () {
         var selectedshuttle = $('option:selected', this).text();
         var shuttleNo = selectedshuttle.split('-')[0];
@@ -118,36 +136,70 @@ $(document).ready(function () {
     getAthletes(0, "start");
 
     $("#btnstopwatchstart").click(function () {
-        $("#playbuttondiv").hide();
-        $("#currentshuttlediv").show();
-        animate1();
-        refreshComponent();
+
     });
 
-   
-    var setProgress=  function (elem, percent) {
+
+    var setProgress = function (elem, percent) {
         var
-            degrees = percent * 3.6,
+            degrees = percent,
             transform = /MSIE 9/.test(navigator.userAgent) ? 'msTransform' : 'transform';
         elem.find('.counter').attr('data-percent', Math.round(percent));
         elem.find('.progressEnd').css(transform, 'rotate(' + degrees + 'deg)');
         elem.find('.progress').css(transform, 'rotate(' + degrees + 'deg)');
-        if (percent >= 50 && !/(^|\s)fiftyPlus(\s|$)/.test(elem.className))
+        if (percent >= number / 2 && !/(^|\s)fiftyPlus(\s|$)/.test(elem.className))
             elem.className += ' fiftyPlus';
     }
 
     var animate1 = function () {
-        alert(number)
-       var
-           elem = $('.circlePercent'),
-           percent = 0;
-       (function animate() {
-           setProgress(elem, (percent += .25));
-           if (percent < number)
-               setTimeout(animate, 15);
-       })();
+
+        var
+            elem = $('.circlePercent'),
+            percent = 0;
+        (function animate() {
+            setProgress(elem, (percent += .1));
+            if (percent < number)
+                setTimeout(animate, 1000);
+        })();
     }
 
-    
+    $(".btn-timer").click(function () {
+
+        $("#playbuttondiv").hide();
+        $("#currentshuttlediv").show();
+        animate1();
+        refreshComponent();
+        var startCountDownTimer = setInterval(function () {
+
+
+            minutesToSeconds = minutesToSeconds - 1;
+            var timer = getTime();
+            $(".btn-timer").html(timer[0] + ":" + timer[1]);
+            if (minutesToSeconds == 0) {
+                clearInterval(startCountDownTimer);
+                console.log("completed");
+            }
+
+
+
+
+        }, 1000)
+    });
+    function getTime() {
+
+        displayminutes = Math.floor(minutesToSeconds / 60);
+        displayseconds = minutesToSeconds - (displayminutes * 60);
+        if (displayseconds < 10) {
+            displayseconds = "0" + displayseconds;
+        }
+        if (displayminutes < 10) {
+            displayminutes = "0" + displayminutes;
+        }
+
+        return [displayminutes, displayseconds];
+
+
+    }
 });
+
 

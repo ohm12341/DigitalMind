@@ -6,6 +6,7 @@
         public int ShuttleNo { get; set; }
         public float Speed { get; set; }
 
+        public bool IsFinalShuttle { get; set; }
         public float TotalTimeForTest { get; set; }
         public float TotalDistance { get; set; }
 

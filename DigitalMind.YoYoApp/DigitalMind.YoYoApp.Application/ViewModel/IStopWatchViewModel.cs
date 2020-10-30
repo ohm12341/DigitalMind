@@ -4,7 +4,8 @@
     {
         public int SpeedLevel { get; set; }
         public int ShuttleNo { get; set; }
-
+        
+        bool IsFinalShuttle { get; set; }
         public float LevelTime { get; set; }
         public float Speed { get; set; }
 

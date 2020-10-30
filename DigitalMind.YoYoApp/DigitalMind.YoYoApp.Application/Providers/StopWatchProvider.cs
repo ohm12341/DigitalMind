@@ -12,17 +12,33 @@ namespace DigitalMind.YoYoApp.Application.Providers
         public StopWatchViewModel GetStopWatchViewModel(int shuttleNumber, int speedLevel)
         {
             var shuttle = Shuttles.FirstOrDefault(x => x.ShuttleNo.Equals(shuttleNumber) && x.SpeedLevel.Equals(speedLevel));
-            var currentshuttleindex = Shuttles.IndexOf(shuttle) + 1;
-            if (currentshuttleindex > 0 && Shuttles.Count > currentshuttleindex)
+            var currentshuttleindex = Shuttles.IndexOf(shuttle);
+            if (currentshuttleindex >= 0)
             {
+                if(currentshuttleindex+1 == Shuttles.Count - 1)
+                {
+                    return new StopWatchViewModel()
+                    {
+                        ShuttleNo = Shuttles[currentshuttleindex + 1].ShuttleNo,
+                        SpeedLevel = Shuttles[currentshuttleindex + 1].SpeedLevel,
+                        Speed = Shuttles[currentshuttleindex + 1].Speed,
+                        LevelTime = Shuttles[currentshuttleindex + 1].LevelTime,
+                        IsFinalShuttle = true,
+                        TotalTimeForTest = Shuttles.Sum(x => x.LevelTime),
+                        NextShuttle = 0,
+                        TotalDistance = Shuttles.Where(x => x.ShuttleNo <= shuttleNumber && x.SpeedLevel <= speedLevel).ToList().Sum(x => x.AccumulatedShuttleDistance),
+                        TotalTime = Shuttles.Where(x => x.ShuttleNo <= shuttleNumber && x.SpeedLevel <= speedLevel).ToList().Sum(x => x.LevelTime),
+                    };
+                }
                 return new StopWatchViewModel()
                 {
-                    ShuttleNo = Shuttles[currentshuttleindex].ShuttleNo,
-                    SpeedLevel = Shuttles[currentshuttleindex].SpeedLevel,
-                    Speed = Shuttles[currentshuttleindex].Speed,
-                    LevelTime = Shuttles[currentshuttleindex].LevelTime,
+                    ShuttleNo = Shuttles[currentshuttleindex + 1].ShuttleNo,
+                    SpeedLevel = Shuttles[currentshuttleindex + 1].SpeedLevel,
+                    Speed = Shuttles[currentshuttleindex + 1].Speed,
+                    LevelTime = Shuttles[currentshuttleindex + 1].LevelTime,
+                    IsFinalShuttle = false,
                     TotalTimeForTest = Shuttles.Sum(x => x.LevelTime),
-                    NextShuttle = (currentshuttleindex + 1 <= Shuttles.Count) ? Shuttles[currentshuttleindex + 1].Speed : 0,
+                    NextShuttle = (currentshuttleindex + 2 < Shuttles.Count) ? Shuttles[currentshuttleindex + 2].Speed : 0,
                     TotalDistance = Shuttles.Where(x => x.ShuttleNo <= shuttleNumber && x.SpeedLevel <= speedLevel).ToList().Sum(x => x.AccumulatedShuttleDistance),
                     TotalTime = Shuttles.Where(x => x.ShuttleNo <= shuttleNumber && x.SpeedLevel <= speedLevel).ToList().Sum(x => x.LevelTime),
                 };
@@ -30,20 +46,20 @@ namespace DigitalMind.YoYoApp.Application.Providers
             }
             else
             {
-
                 var firstshuttle = Shuttles.FirstOrDefault();
                 return new StopWatchViewModel()
                 {
-
+                    IsFinalShuttle = false,
                     ShuttleNo = firstshuttle.ShuttleNo,
                     SpeedLevel = firstshuttle.SpeedLevel,
                     Speed = firstshuttle.Speed,
                     TotalTimeForTest = Shuttles.Sum(x => x.LevelTime),
                     LevelTime = firstshuttle.LevelTime,
-                    NextShuttle = (2 <= Shuttles.Count) ? Shuttles[2].Speed : 0,
+                    NextShuttle = (Shuttles.Count >=2) ? Shuttles[1].Speed : 0,
 
                 };
             }
+
 
         }
     }

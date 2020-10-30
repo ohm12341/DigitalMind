@@ -23,7 +23,7 @@
     </div>
 
     <div id="playbuttondiv" style="text-align:center;border-radius: 50%;">
-        <button id="btnstopwatchstart" class='button play'></button>
+        <button id="btnstopwatchstart" class="btn btn-default btn-timer button play" ></button>
     </div>
     <div class="row">
         <div class="col" style="padding-right:20px; border-right: 2px solid #ccc;">
@@ -61,7 +61,7 @@
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
-    var number = @ViewBag.TotalTimeForTest; //Accessing the number from the ViewBag
-   
-    
+    var number = @ViewBag.TotalTimeForTest * 1000; //Accessing the number from the ViewBag
+    var currentTimeLevel = @ViewBag.ShuttleInitialTime;
+
 </script>
