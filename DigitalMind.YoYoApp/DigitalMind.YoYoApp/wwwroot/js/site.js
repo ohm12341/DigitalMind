@@ -3,29 +3,31 @@ var displayminutes;
 var displayseconds;
 var percent = 0;
 var initializeTimer = 1.5 // enter in minutes
-var minutesToSeconds = number;
+var minutesToSeconds = totalTimeForTest;
 var startCountDownTimer;
-var rotationAngle = 360 / number;
+var rotationAngle = 360 / totalTimeForTest;
 var setTime;
 $(document).ready(function () {
     var timeouthandle;
-
+    var nextShuttleTimer;
     $("#currentshuttlediv").hide();
 
     $(".btn-timer").html("Start")
 
-    var refreshComponent = function () {
+    var refreshShuttle = function () {
         var shuttleNo = $('#shuttlenumber').text();
         var speedlevel = $("#shuttlespeedlevel").text()
         window.clearInterval(timeouthandle);
+        window.clearInterval(nextShuttleTimer);
         $.get("/Home/GetStopWatchViewModel", { shuttleNumber: shuttleNo, speedLevel: speedlevel }, function (data) {
            
             if (data.isFinalShuttle == false) {
-                timeouthandle = window.setInterval(refreshComponent, data.levelTime * 1000)
+                timeouthandle = window.setInterval(refreshShuttle, data.levelTime * 1000)
             }
             else {
                 window.clearInterval(timeouthandle);
                 window.clearInterval(startCountDownTimer);
+                window.clearInterval(nextShuttleTimer);
             }
             currentTimeLevel += data.levelTime;
 
@@ -33,7 +35,18 @@ $(document).ready(function () {
             $("#shuttlespeedlevel").html(data.speedLevel)
             $("#totalDistance").html(data.totalDistance)
             $("#totalTime").html(data.totalTime)
-            $("#nextShuttle").html(data.nextShuttle)
+
+            var nextshuttledisplaytime = getTime(data.levelTime);
+
+            $("#nextShuttle").html(Math.round(nextshuttledisplaytime[0]) + ":" + Math.round(nextshuttledisplaytime[1]))
+            var nextshuttletime = data.levelTime;
+            nextShuttleTimer = setInterval(function () {
+
+                nextshuttletime = nextshuttletime - 1;
+                $("#nextShuttle").html(data.levelTime)
+                var timer = getTime(nextshuttletime);
+                $("#nextShuttle").html(Math.round(timer[0]) + ":" + Math.round(timer[1]))
+            }, 1000)
             $("#speed").html(data.speed)
 
         });
@@ -130,25 +143,32 @@ $(document).ready(function () {
 
     getAthletes(0, "start");
 
-    $("#btnstopwatchstart").click(function () {
-
-    });
-
     var setProgress = function (percent) {
-        var progressValue = Math.round((percent * 100) / number)
+        var progressValue = Math.round((percent * 100) / totalTimeForTest)
         $('.progress-bar').css('width', progressValue + '%').attr('aria-valuenow', progressValue).html(progressValue + '%');
     }
 
-    var animate1 = function () {
+    var startTimerAndProgressBar = function () {
 
         var  percent = 0;
         (function animate() {
             setProgress((percent += 1));
-            if (percent < number)
+            if (percent < totalTimeForTest)
                 setTimeout(animate, 1000);
             else {
                 $(".btn-timer").html("Start");
                 $('.progress-bar').css('width', 0 + '%').attr('aria-valuenow', 0).html(0 + '%');
+                $("#shuttlenumber").html('');
+                $("#shuttlespeedlevel").html('')
+                $("#totalDistance").html('')
+                $("#totalTime").html('')
+                $("#nextShuttle").html('')
+                $("#speed").html('')
+                $.post("/Home/SaveTestResult", {}, function (data) {
+                    $("#btnstopwatchstart").prop('disabled', false);
+                    minutesToSeconds = totalTimeForTest;
+                });
+
             }
         })();
     }
@@ -157,14 +177,15 @@ $(document).ready(function () {
 
         $("#playbuttondiv").hide();
         $("#currentshuttlediv").show();
-        setTime = getTime();
+        $("#btnstopwatchstart").prop('disabled', true);
+        setTime = getTime(minutesToSeconds);
         $(".btn-timer").html(Math.round(setTime[0]) + ":" + Math.round(setTime[1]))
-        animate1();
-        refreshComponent();
+        startTimerAndProgressBar();
+        refreshShuttle();
         startCountDownTimer  = setInterval(function () {
 
             minutesToSeconds = minutesToSeconds - 1;
-            var timer = getTime();
+            var timer = getTime(minutesToSeconds);
             $(".btn-timer").html(Math.round(timer[0]) + ":" + Math.round(timer[1]));
             if (minutesToSeconds == 0) {
                 clearInterval(startCountDownTimer);
@@ -172,10 +193,11 @@ $(document).ready(function () {
             }
         }, 1000)
     });
-    function getTime() {
+
+    function getTime(mintosecond) {
 
         displayminutes = Math.floor(minutesToSeconds / 60);
-        displayseconds = minutesToSeconds - (displayminutes * 60);
+        displayseconds = mintosecond - (displayminutes * 60);
         if (displayseconds < 10) {
             displayseconds = "0" + displayseconds;
         }

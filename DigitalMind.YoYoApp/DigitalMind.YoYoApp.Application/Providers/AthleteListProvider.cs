@@ -49,9 +49,23 @@ namespace DigitalMind.YoYoApp.Application.Providers
                 if (athlete.Id.Equals(athleteId))
                 {
                     athlete.ShuttleState = testresult;
-                    athlete.FinishedShuttles = _shuttles.Where(x => x.ShuttleNo <= shuttlenumber && x.SpeedLevel <= shuttlespeedlevel).ToList();
-                    if (athlete.CurrentShuttle == null)
-                        athlete.CurrentShuttle = _shuttles.Where(x => x.ShuttleNo == shuttlenumber && x.SpeedLevel == shuttlespeedlevel).FirstOrDefault();
+                    if (athlete.ShuttleState.Equals("stop"))
+                    {
+                        var indexofcurrentshuttle = _shuttles.IndexOf(_shuttles.FirstOrDefault(x => x.ShuttleNo == shuttlenumber && x.SpeedLevel == shuttlespeedlevel));
+                        
+                        athlete.FinishedShuttles = _shuttles.Where(x => x.ShuttleNo <= shuttlenumber && x.SpeedLevel <= shuttlespeedlevel).ToList();
+                        if (athlete.CurrentShuttle == null)
+                            if (indexofcurrentshuttle > 1)
+                            {
+                                athlete.CurrentShuttle = _shuttles[indexofcurrentshuttle - 1];
+                            }
+                            else
+                            {
+                                athlete.CurrentShuttle = new Shuttle();
+                            }
+
+                    }
+
                 }
             }
 
@@ -72,8 +86,16 @@ namespace DigitalMind.YoYoApp.Application.Providers
             {
                 if (athlete.Id.Equals(athleteId))
                 {
+                    var indexofcurrentshuttle = _shuttles.IndexOf(_shuttles.FirstOrDefault(x => x.ShuttleNo == shuttlenumber && x.SpeedLevel == shuttlespeedlevel));
                     athlete.ShuttleState = testresult;
-                    athlete.CurrentShuttle = _shuttles.Where(x => x.ShuttleNo == shuttlenumber && x.SpeedLevel == shuttlespeedlevel).FirstOrDefault();
+                    if (indexofcurrentshuttle > 1)
+                    {
+                        athlete.CurrentShuttle = _shuttles[indexofcurrentshuttle - 1];
+                    }
+                    else
+                    {
+                        athlete.CurrentShuttle = new Shuttle();
+                    }
                 }
             }
 
@@ -83,6 +105,11 @@ namespace DigitalMind.YoYoApp.Application.Providers
             };
 
             return athleteViewModel;
+        }
+
+        public void SaveYoYoTestResult()
+        {
+            this._shuttles = new List<Shuttle>();
         }
     }
 }

@@ -10,12 +10,12 @@ C:\Users\anoop\source\repos\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\
 C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\bin\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Application.deps.json
 C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\bin\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Application.dll
 C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\bin\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Application.pdb
+C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\bin\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.dll
+C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\bin\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.pdb
 C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Application.csprojAssemblyReference.cache
 C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Application.csproj.CoreCompileInputs.cache
 C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Application.AssemblyInfoInputs.cache
 C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Application.AssemblyInfo.cs
+C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Application.csproj.CopyComplete
 C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Application.dll
 C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Application.pdb
-C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\bin\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.dll
-C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\bin\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Domain.pdb
-C:\Users\anoop\src\DigitalMind\DigitalMind.YoYoApp\DigitalMind.YoYoApp.Application\obj\Debug\netcoreapp3.1\DigitalMind.YoYoApp.Application.csproj.CopyComplete

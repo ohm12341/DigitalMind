@@ -16,8 +16,15 @@ namespace DigitalMind.YoYoApp.Application.Providers
         StopWatchViewModel GetStopWatchViewModel(int shuttleNumber, int speedLevel);
 
         /// <summary>
+        /// Method to save final sate of test
+        /// </summary>
+        void SaveTestShuttleState();
+
+        /// <summary>
         /// Lsit of shuttles 
         /// </summary>
         List<Shuttle> Shuttles { get; set; }
+
+
     }
 }

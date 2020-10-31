@@ -62,5 +62,10 @@ namespace DigitalMind.YoYoApp.Application.Providers
 
 
         }
+
+        public void SaveTestShuttleState()
+        {
+            this.Shuttles = new List<Shuttle>();
+        }
     }
 }

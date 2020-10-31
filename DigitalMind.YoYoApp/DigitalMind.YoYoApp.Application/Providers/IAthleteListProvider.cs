@@ -21,6 +21,7 @@ namespace DigitalMind.YoYoApp.Application.Providers
           int shuttlenumber,
          int shuttlespeedlevel);
 
+        void SaveYoYoTestResult();
 
     }
 }
