@@ -12,6 +12,8 @@ $(document).ready(function () {
     var nextShuttleTimer;
     $("#currentshuttlediv").hide();
 
+    $("#nextShuttle").html("0 - 0")
+
     $(".btn-timer").html("Start")
 
     var refreshShuttle = function () {
@@ -118,6 +120,8 @@ $(document).ready(function () {
             });
     };
 
+    getAthletes(0, "start");
+
     $(document).on('change', "#athleteShuttleResult", function () {
         var selectedshuttle = $('option:selected', this).text();
         var shuttleNo = selectedshuttle.split('-')[0];
@@ -141,7 +145,7 @@ $(document).ready(function () {
         getAthletes(dataID, datavval);
     });
 
-    getAthletes(0, "start");
+   
 
     var setProgress = function (percent) {
         var progressValue = Math.round((percent * 100) / totalTimeForTest)
@@ -156,21 +160,28 @@ $(document).ready(function () {
             if (percent < totalTimeForTest)
                 setTimeout(animate, 1000);
             else {
-                $(".btn-timer").html("Start");
-                $('.progress-bar').css('width', 0 + '%').attr('aria-valuenow', 0).html(0 + '%');
-                $("#shuttlenumber").html('');
-                $("#shuttlespeedlevel").html('')
-                $("#totalDistance").html('')
-                $("#totalTime").html('')
-                $("#nextShuttle").html('')
-                $("#speed").html('')
-                $.post("/Home/SaveTestResult", {}, function (data) {
-                    $("#btnstopwatchstart").prop('disabled', false);
-                    minutesToSeconds = totalTimeForTest;
-                });
+                resetUI();
 
             }
         })();
+    }
+
+    var resetUI = function () {
+        $(".btn-timer").html("Start");
+        $('.progress-bar').css('width', 0 + '%').attr('aria-valuenow', 0).html(0 + '%');
+        $("#shuttlenumber").html('');
+        $("#shuttlespeedlevel").html('')
+        $("#totalDistance").html('')
+        $("#totalTime").html('')
+        $("#nextShuttle").html('')
+        $("#speed").html('')
+        $("#nextShuttle").html('')
+       
+        $.post("/Home/SaveTestResult", {}, function (data) {
+            $("#btnstopwatchstart").prop('disabled', false);
+            getAthletes(0, "start")
+            minutesToSeconds = totalTimeForTest;
+        });
     }
 
     $(".btn-timer").click(function () {

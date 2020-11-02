@@ -33,7 +33,7 @@ namespace DigitalMind.YoYoApp.Controllers
             this.athleteListProvider = athleteListProvider;
 
             this.stopWatchProvider.Shuttles = athleteShuttleServices.GetAllShuttles();
-            
+
             this.athleteListProvider.SetAthletes(athleteShuttleServices.GetAllAthletes());
 
             this.athleteListProvider.SetShuttles(this.stopWatchProvider.Shuttles);
@@ -47,13 +47,13 @@ namespace DigitalMind.YoYoApp.Controllers
 
             return View();
         }
-        
+
         public IActionResult GetStopWatchViewModel(int shuttleNumber, int speedLevel)
         {
             var viewmodel = stopWatchProvider.GetStopWatchViewModel(shuttleNumber, speedLevel);
             return Json(viewmodel);
         }
-        
+
         public IActionResult GetUpdatedAthleteViewModel(UpdateAthleteStateModel updateAthleteStateModel)
         {
             var viewmodel = athleteListProvider.
@@ -62,7 +62,7 @@ namespace DigitalMind.YoYoApp.Controllers
                                     updateAthleteStateModel.testresult,
                                     updateAthleteStateModel.shuttlenumber,
                                     updateAthleteStateModel.shuttlespeedlevel);
-           
+
             return Json(viewmodel);
         }
 
@@ -94,7 +94,7 @@ namespace DigitalMind.YoYoApp.Controllers
 
             return Json(viewmodel);
         }
-       
+
         public IActionResult Privacy()
         {
             return View();

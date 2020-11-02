@@ -52,10 +52,13 @@ namespace DigitalMind.YoYoApp.Application.Providers
                     if (athlete.ShuttleState.Equals("stop"))
                     {
                         var indexofcurrentshuttle = _shuttles.IndexOf(_shuttles.FirstOrDefault(x => x.ShuttleNo == shuttlenumber && x.SpeedLevel == shuttlespeedlevel));
-                        
-                        athlete.FinishedShuttles = _shuttles.Where(x => x.ShuttleNo <= shuttlenumber && x.SpeedLevel <= shuttlespeedlevel).ToList();
+
+                        athlete.FinishedShuttles.AddRange(_shuttles.Where(x => x.ShuttleNo == shuttlenumber && x.SpeedLevel <= shuttlespeedlevel).ToList());
+
+                        athlete.FinishedShuttles.AddRange(_shuttles.Where(x => x.ShuttleNo < shuttlenumber).ToList());
+
                         if (athlete.CurrentShuttle == null)
-                            if (indexofcurrentshuttle > 1)
+                            if (indexofcurrentshuttle >= 1)
                             {
                                 athlete.CurrentShuttle = _shuttles[indexofcurrentshuttle - 1];
                             }
@@ -88,14 +91,9 @@ namespace DigitalMind.YoYoApp.Application.Providers
                 {
                     var indexofcurrentshuttle = _shuttles.IndexOf(_shuttles.FirstOrDefault(x => x.ShuttleNo == shuttlenumber && x.SpeedLevel == shuttlespeedlevel));
                     athlete.ShuttleState = testresult;
-                    if (indexofcurrentshuttle > 1)
-                    {
-                        athlete.CurrentShuttle = _shuttles[indexofcurrentshuttle - 1];
-                    }
-                    else
-                    {
-                        athlete.CurrentShuttle = new Shuttle();
-                    }
+                 
+                    if (indexofcurrentshuttle >= 0)
+                        athlete.CurrentShuttle = _shuttles[indexofcurrentshuttle];
                 }
             }
 
@@ -110,6 +108,8 @@ namespace DigitalMind.YoYoApp.Application.Providers
         public void SaveYoYoTestResult()
         {
             this._shuttles = new List<Shuttle>();
+            isAthleteInitialized = false;
+            isShuttleInitialized = false;
         }
     }
 }

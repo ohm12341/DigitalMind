@@ -13,7 +13,7 @@ namespace DigitalMind.YoYoApp.Domain.Models
         public int Id { get; set; }
 
         public string Name { get; set; }
-        public List<Shuttle> FinishedShuttles { get; set; }
+        public List<Shuttle> FinishedShuttles { get; set; } = new List<Shuttle>();
 
         public Shuttle CurrentShuttle { get; set; }
         public string ShuttleState { get; set; }

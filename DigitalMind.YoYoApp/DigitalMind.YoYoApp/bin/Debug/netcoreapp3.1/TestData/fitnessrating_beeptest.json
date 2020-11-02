@@ -18,35 +18,5 @@
     "CommulativeTime": "00:46",
     "StartTime": "00:25",
     "ApproxVo2Max": "37.07"
-  },
-  {
-    "AccumulatedShuttleDistance": "120",
-    "SpeedLevel": "11",
-    "ShuttleNo": "1",
-    "Speed": "13",
-    "LevelTime": "11.1",
-    "CommulativeTime": "01:07",
-    "StartTime": "00:47",
-    "ApproxVo2Max": "37.41"
-  },
-  {
-    "AccumulatedShuttleDistance": "160",
-    "SpeedLevel": "11",
-    "ShuttleNo": "2",
-    "Speed": "13",
-    "LevelTime": "11.1",
-    "CommulativeTime": "01:29",
-    "StartTime": "01:08",
-    "ApproxVo2Max": "37.74"
-  },
-  {
-    "AccumulatedShuttleDistance": "200",
-    "SpeedLevel": "12",
-    "ShuttleNo": "1",
-    "Speed": "13.5",
-    "LevelTime": "10.7",
-    "CommulativeTime": "01:49",
-    "StartTime": "01:30",
-    "ApproxVo2Max": "38.08"
   }
 ]

@@ -47,12 +47,7 @@ namespace DigitalMind.YoYoApp.TestData
 
             var testdata = new List<Athlete>()
             {
-                new Athlete()
-                {
-
-                    Name = "Usain Bolt",
-                     ShuttleState="Start"
-                },
+                
                 new Athlete()
                 {
 
