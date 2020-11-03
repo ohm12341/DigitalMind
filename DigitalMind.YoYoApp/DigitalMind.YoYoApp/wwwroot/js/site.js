@@ -7,6 +7,9 @@ var minutesToSeconds = totalTimeForTest;
 var startCountDownTimer;
 var rotationAngle = 360 / totalTimeForTest;
 var setTime;
+
+var firstTimeInitilize = true;
+
 $(document).ready(function () {
     var timeouthandle;
     var nextShuttleTimer;
@@ -28,7 +31,7 @@ $(document).ready(function () {
             }
             else {
                 window.clearInterval(timeouthandle);
-                window.clearInterval(startCountDownTimer);
+             
                 window.clearInterval(nextShuttleTimer);
             }
             currentTimeLevel += data.levelTime;
@@ -43,11 +46,17 @@ $(document).ready(function () {
             $("#nextShuttle").html(Math.round(nextshuttledisplaytime[0]) + ":" + Math.round(nextshuttledisplaytime[1]))
             var nextshuttletime = data.levelTime;
             nextShuttleTimer = setInterval(function () {
-
+                var min, sec;
                 nextshuttletime = nextshuttletime - 1;
                 $("#nextShuttle").html(data.levelTime)
                 var timer = getTime(nextshuttletime);
-                $("#nextShuttle").html(Math.round(timer[0]) + ":" + Math.round(timer[1]))
+
+                if (!Number.isNaN(Math.round(timer[0])))
+                    min = Math.round(timer[0])
+                if (!Number.isNaN(Math.round(timer[1]))) {
+                    sec = Math.round(timer[1])
+                }
+                $("#nextShuttle").html(min + ":" + sec)
             }, 1000)
             $("#speed").html(data.speed)
 
@@ -81,8 +90,8 @@ $(document).ready(function () {
                         row = "<tr>" +
                             "<td>" + item.name + "</td>" +
 
-                            "<td><input type='button' class='btn btn-outline-primary' style='width: 80px; height: 25px;' value='Warn' data-id='" + item.id + "' data-value='warn' /></td>" +
-                            "<td><input type='button'  class='btn btn-outline-danger' style='width: 80px; height: 25px;' value='Stop' data-id='" + item.id + "'  data-value='stop'  /></td>" +
+                            "<td><input  type='button' class='btn btn-outline-primary' style='width: 80px; height: 25px;' value='Warn' data-id='" + item.id + "' data-value='warn' /></td>" +
+                            "<td><input  type='button'  class='btn btn-outline-danger' style='width: 80px; height: 25px;' value='Stop' data-id='" + item.id + "'  data-value='stop'  /></td>" +
                             "</tr>";
                     }
                     else if (item.shuttleState == 'warn') {
@@ -116,36 +125,14 @@ $(document).ready(function () {
                     $('#tblathlete').append(row);
                 });
 
+                if (firstTimeInitilize) {
 
+                    $('.btn-outline-primary').prop('disabled', true);
+                    $('.btn-outline-danger').prop('disabled', true);
+                }
             });
     };
-
-    getAthletes(0, "start");
-
-    $(document).on('change', "#athleteShuttleResult", function () {
-        var selectedshuttle = $('option:selected', this).text();
-        var shuttleNo = selectedshuttle.split('-')[0];
-        var speedlevel = selectedshuttle.split('-')[1];
-        var athleteid = $(this).val();
-        $.post("/Home/UpdateAthleteResult",
-            {
-                athleteId: athleteid,
-                testresult: "stop",
-                shuttlenumber: shuttleNo,
-                shuttlespeedlevel: speedlevel
-            },
-            function (data) {
-
-            });
-    });
-
-    $(document).on("click", "tr input[value=Warn],input[value=Stop]", function () {
-        var dataID = $(this).attr("data-id");
-        var datavval = $(this).attr("data-value");
-        getAthletes(dataID, datavval);
-    });
-
-   
+    
 
     var setProgress = function (percent) {
         var progressValue = Math.round((percent * 100) / totalTimeForTest)
@@ -176,7 +163,10 @@ $(document).ready(function () {
         $("#nextShuttle").html('')
         $("#speed").html('')
         $("#nextShuttle").html('')
-       
+        window.clearInterval(timeouthandle);
+        window.clearInterval(nextShuttleTimer);
+        firstTimeInitilize = true;
+
         $.post("/Home/SaveTestResult", {}, function (data) {
             $("#btnstopwatchstart").prop('disabled', false);
             getAthletes(0, "start")
@@ -189,15 +179,23 @@ $(document).ready(function () {
         $("#playbuttondiv").hide();
         $("#currentshuttlediv").show();
         $("#btnstopwatchstart").prop('disabled', true);
+        $('.btn-outline-primary').prop('disabled', false);
+        $('.btn-outline-danger').prop('disabled', false);
+        firstTimeInitilize = false;
         setTime = getTime(minutesToSeconds);
         $(".btn-timer").html(Math.round(setTime[0]) + ":" + Math.round(setTime[1]))
         startTimerAndProgressBar();
         refreshShuttle();
-        startCountDownTimer  = setInterval(function () {
-
+        startCountDownTimer = setInterval(function () {
+            var min=0, sec=0;
             minutesToSeconds = minutesToSeconds - 1;
             var timer = getTime(minutesToSeconds);
-            $(".btn-timer").html(Math.round(timer[0]) + ":" + Math.round(timer[1]));
+            if (!Number.isNaN(Math.round(timer[0])))
+                min = Math.round(timer[0])
+            if (!Number.isNaN(Math.round(timer[1]))) {
+                sec = Math.round(timer[1])
+            }
+            $(".btn-timer").html(min + ":" + sec);
             if (minutesToSeconds == 0) {
                 clearInterval(startCountDownTimer);
                 console.log("completed");
@@ -205,9 +203,38 @@ $(document).ready(function () {
         }, 1000)
     });
 
+    getAthletes(0, "start");
+
+    $('.btn-outline-primary').prop('disabled', true);
+
+    $('.btn-outline-danger').prop('disabled', true);
+
+    $(document).on('change', "#athleteShuttleResult", function () {
+        var selectedshuttle = $('option:selected', this).text();
+        var shuttleNo = selectedshuttle.split('-')[0];
+        var speedlevel = selectedshuttle.split('-')[1];
+        var athleteid = $(this).val();
+        $.post("/Home/UpdateAthleteResult",
+            {
+                athleteId: athleteid,
+                testresult: "stop",
+                shuttlenumber: shuttleNo,
+                shuttlespeedlevel: speedlevel
+            },
+            function (data) {
+
+            });
+    });
+
+    $(document).on("click", "tr input[value=Warn],input[value=Stop]", function () {
+        var dataID = $(this).attr("data-id");
+        var datavval = $(this).attr("data-value");
+        getAthletes(dataID, datavval);
+    });
+
     function getTime(mintosecond) {
 
-        displayminutes = Math.floor(minutesToSeconds / 60);
+        displayminutes = Math.floor(mintosecond / 60);
         displayseconds = mintosecond - (displayminutes * 60);
         if (displayseconds < 10) {
             displayseconds = "0" + displayseconds;
