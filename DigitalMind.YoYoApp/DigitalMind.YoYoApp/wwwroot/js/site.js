@@ -31,7 +31,7 @@ $(document).ready(function () {
             }
             else {
                 window.clearInterval(timeouthandle);
-             
+                //window.clearInterval(startCountDownTimer);
                 window.clearInterval(nextShuttleTimer);
             }
             currentTimeLevel += data.levelTime;
@@ -165,6 +165,7 @@ $(document).ready(function () {
         $("#nextShuttle").html('')
         window.clearInterval(timeouthandle);
         window.clearInterval(nextShuttleTimer);
+        window.clearInterval(startCountDownTimer)
         firstTimeInitilize = true;
 
         $.post("/Home/SaveTestResult", {}, function (data) {
@@ -239,8 +240,8 @@ $(document).ready(function () {
         if (displayseconds < 10) {
             displayseconds = "0" + displayseconds;
         }
-        if (displayminutes < 10) {
-            displayminutes = "0" + displayminutes;
+        if (displayminutes < 0) {
+            displayminutes = 1;
         }
 
         return [displayminutes, displayseconds];
