@@ -26,8 +26,8 @@ namespace DigitalMind.YoYoApp.Application.Providers
                         IsFinalShuttle = true,
                         TotalTimeForTest = Shuttles.Sum(x => x.LevelTime),
                         NextShuttle = 0,
-                        TotalDistance = Shuttles.Where(x => x.ShuttleNo <= shuttleNumber && x.SpeedLevel <= speedLevel).ToList().Sum(x => x.AccumulatedShuttleDistance),
-                        TotalTime = Shuttles.Where(x => x.ShuttleNo <= shuttleNumber && x.SpeedLevel <= speedLevel).ToList().Sum(x => x.LevelTime),
+                        TotalDistance = GetTotalDistance(shuttleNumber, speedLevel),
+                        TotalTime = GetTotalTime(shuttleNumber, speedLevel)
                     };
                 }
                 return new StopWatchViewModel()
@@ -39,8 +39,8 @@ namespace DigitalMind.YoYoApp.Application.Providers
                     IsFinalShuttle = false,
                     TotalTimeForTest = Shuttles.Sum(x => x.LevelTime),
                     NextShuttle = (currentshuttleindex + 2 < Shuttles.Count) ? Shuttles[currentshuttleindex + 2].Speed : 0,
-                    TotalDistance = Shuttles.Where(x => x.ShuttleNo <= shuttleNumber && x.SpeedLevel <= speedLevel).ToList().Sum(x => x.AccumulatedShuttleDistance),
-                    TotalTime = Shuttles.Where(x => x.ShuttleNo <= shuttleNumber && x.SpeedLevel <= speedLevel).ToList().Sum(x => x.LevelTime),
+                    TotalDistance = GetTotalDistance(shuttleNumber, speedLevel),
+                    TotalTime = GetTotalTime(shuttleNumber, speedLevel)
                 };
 
             }
@@ -66,6 +66,26 @@ namespace DigitalMind.YoYoApp.Application.Providers
         public void SaveTestShuttleState()
         {
             this.Shuttles = new List<Shuttle>();
+        }
+
+        private float GetTotalDistance(int shuttlenumber,int shuttlespeedlevel)
+        {
+            float totDist = 0;
+
+            totDist+= Shuttles.Where(x => x.ShuttleNo == shuttlenumber && x.SpeedLevel <= shuttlespeedlevel).Sum(x => x.AccumulatedShuttleDistance);
+            totDist += Shuttles.Where(x => x.ShuttleNo < shuttlenumber && x.SpeedLevel <= shuttlespeedlevel).ToList().Sum(x => x.AccumulatedShuttleDistance);
+
+            return totDist;
+        }
+
+        private float GetTotalTime(int shuttlenumber, int shuttlespeedlevel)
+        {
+            float totDist = 0;
+
+            totDist += Shuttles.Where(x => x.ShuttleNo == shuttlenumber && x.SpeedLevel <= shuttlespeedlevel).Sum(x => x.LevelTime);
+            totDist += Shuttles.Where(x => x.ShuttleNo < shuttlenumber && x.SpeedLevel <= shuttlespeedlevel).ToList().Sum(x => x.LevelTime);
+
+            return totDist;
         }
     }
 }
